@@ -14,7 +14,6 @@ struct ContentView: View {
     @State private var nums: Int = 124892
     @State private var isNavigating = false
     @State private var navigateNoOrders = false
-    @State var Funciona3 = [Card]()
     var body: some View {
         NavigationStack() {
             VStack {
@@ -33,10 +32,6 @@ struct ContentView: View {
                 Image("logo")
                     .resizable()
                     .frame(width: 311, height: 153)
-                /*Text("Manejo de donaciones")
-                    .font(.system(size: 27).bold())
-                    .foregroundColor(Color(red: 45/255, green: 45/255, blue: 45/255))
-                    .padding([.top, .bottom], 21)*/
                 VStack{
                     
                     Text("Inicia sesión para\ncontinuar")
@@ -44,7 +39,7 @@ struct ContentView: View {
                         .font(.system(size: 24).bold())
                         .multilineTextAlignment(.center)
                         .padding(.top, 34)
-                    TextField("", text: $username, prompt: Text("Usuario \(nums, specifier: "%,d")").foregroundColor(Color(red: 189/255, green: 195/255, blue: 199/255)))
+                    TextField("", text: $username, prompt: Text("Usuario \(nums, specifier: "%")").foregroundColor(Color(red: 189/255, green: 195/255, blue: 199/255)))
                         .padding([.leading, .trailing], 42)
                         .padding(.top, 40)
                         .foregroundColor(Color(red: 0, green: 59/255, blue: 92/255))
@@ -67,14 +62,18 @@ struct ContentView: View {
                         .font(.system(size: 20))
                         .foregroundColor(.red)
                     Button("Iniciar Sesión", action: {
-                        if validate() {
-                            isNavigating = true
-                        }
-                        else if sinRecibos() {
-                            navigateNoOrders = true
-                        }
-                        else {
-                            mensajeError = "Credenciales Incorrectas"
+                        loginManager(username: username, password: password) { userId in
+                            if (userId == 1) {
+                                mensajeError = ""
+                                UserDefaults.standard.setValue(userId, forKey: "userId")
+                                navigateNoOrders = true
+                            } else if (userId == 2) {
+                                mensajeError = "Ha ocurrido un error"
+                                navigateNoOrders = false
+                            } else {
+                                mensajeError = "Credenciales Incorrectas"
+                                navigateNoOrders = false
+                            }
                         }
                     })
                         .frame(width: 308, height: 54)
@@ -84,7 +83,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .padding(.top, 30)
                         .navigationDestination(isPresented: $isNavigating) {
-                            //Dashboard().navigationBarBackButtonHidden()
+                            EmptyView()
                         }
                         .navigationDestination(isPresented: $navigateNoOrders) {
                             //EmptyDashView().navigationBarBackButtonHidden()
@@ -106,20 +105,6 @@ struct ContentView: View {
             .background(Color.white)
             
             
-        }
-    }
-    private func validate() -> Bool {
-        if (username == "Gustavo" && password == "12345"){
-           return true
-        }else{
-            return false
-        }
-    }
-    private func sinRecibos() -> Bool {
-        if (username == "Abee" && password == "12345") {
-            return true
-        } else {
-            return false
         }
     }
 }
