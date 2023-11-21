@@ -48,9 +48,8 @@ De tal modo, la necesidad de una aplicación móvil en iOS diseñada específica
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Files
-1. [Documento de primera Entrega](https://docs.google.com/document/d/1FU--T_V6r2HdOvQUN66BRGiJ24qyE3vk9rTimNSH4_8/edit?usp=sharing)
+1. [Documento de Primera Entrega](https://docs.google.com/document/d/1FU--T_V6r2HdOvQUN66BRGiJ24qyE3vk9rTimNSH4_8/edit?usp=sharing)
 
 2. [Documento de Segunda Entrega](https://docs.google.com/document/d/1CAPHNk-6dLt_x0R2uCbSaKYclDm0Tlr3cuIQXjMwgjs/edit?usp=sharing)
 
-# Repositorio App Recolector
-[Acceso a github](https://github.com/VMink/AplicacionMobil.git)
+3. [Documento de Tercera Entrega](https://docs.google.com/document/d/1IETcE38SVgsrF8jmTCMLyGsm3rwCE9q5cMa60D_V8eo/edit?usp=sharing)
