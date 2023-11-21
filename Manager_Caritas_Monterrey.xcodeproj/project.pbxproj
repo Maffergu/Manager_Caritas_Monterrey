@@ -12,6 +12,9 @@
 		0B4359372AFB71090050E081 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B4359362AFB71090050E081 /* Assets.xcassets */; };
 		0B43593A2AFB71090050E081 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B4359392AFB71090050E081 /* Preview Assets.xcassets */; };
 		0B4359432AFB8CC00050E081 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4359422AFB8CC00050E081 /* API.swift */; };
+		FB20C3632B0D28EE000F6D02 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20C3622B0D28EE000F6D02 /* Dashboard.swift */; };
+		FB20C3652B0D292E000F6D02 /* DetallesReciboView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20C3642B0D292E000F6D02 /* DetallesReciboView.swift */; };
+		FB20C3672B0D296F000F6D02 /* Cards.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB20C3662B0D296F000F6D02 /* Cards.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +24,9 @@
 		0B4359362AFB71090050E081 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B4359392AFB71090050E081 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0B4359422AFB8CC00050E081 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		FB20C3622B0D28EE000F6D02 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		FB20C3642B0D292E000F6D02 /* DetallesReciboView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetallesReciboView.swift; sourceTree = "<group>"; };
+		FB20C3662B0D296F000F6D02 /* Cards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cards.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,9 +59,8 @@
 		0B4359312AFB71070050E081 /* Manager_Caritas_Monterrey */ = {
 			isa = PBXGroup;
 			children = (
-				0B4359322AFB71070050E081 /* Manager_Caritas_MonterreyApp.swift */,
-				0B4359342AFB71070050E081 /* ContentView.swift */,
-				0B4359422AFB8CC00050E081 /* API.swift */,
+				FB20C3682B0D298B000F6D02 /* Model */,
+				FB20C3692B0D2996000F6D02 /* View */,
 				0B4359362AFB71090050E081 /* Assets.xcassets */,
 				0B4359382AFB71090050E081 /* Preview Content */,
 			);
@@ -68,6 +73,26 @@
 				0B4359392AFB71090050E081 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FB20C3682B0D298B000F6D02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B4359422AFB8CC00050E081 /* API.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB20C3692B0D2996000F6D02 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B4359322AFB71070050E081 /* Manager_Caritas_MonterreyApp.swift */,
+				0B4359342AFB71070050E081 /* ContentView.swift */,
+				FB20C3622B0D28EE000F6D02 /* Dashboard.swift */,
+				FB20C3642B0D292E000F6D02 /* DetallesReciboView.swift */,
+				FB20C3662B0D296F000F6D02 /* Cards.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +167,9 @@
 			files = (
 				0B4359352AFB71070050E081 /* ContentView.swift in Sources */,
 				0B4359432AFB8CC00050E081 /* API.swift in Sources */,
+				FB20C3632B0D28EE000F6D02 /* Dashboard.swift in Sources */,
+				FB20C3672B0D296F000F6D02 /* Cards.swift in Sources */,
+				FB20C3652B0D292E000F6D02 /* DetallesReciboView.swift in Sources */,
 				0B4359332AFB71070050E081 /* Manager_Caritas_MonterreyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
