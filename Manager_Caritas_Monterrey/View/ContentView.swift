@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Caritas_Monterrey
 //
-//  Created by Alumno on 17/10/23.
+//  Created by Eduardo Lugo on 17/10/23.
 //
 
 import SwiftUI
@@ -83,10 +83,10 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .padding(.top, 30)
                         .navigationDestination(isPresented: $isNavigating) {
-                            EmptyView()
+                            Dashboard().navigationBarBackButtonHidden()
                         }
                         .navigationDestination(isPresented: $navigateNoOrders) {
-                            //EmptyDashView().navigationBarBackButtonHidden()
+                            Dashboard().navigationBarBackButtonHidden()
                         }
                     
                     Spacer()
@@ -114,3 +114,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
