@@ -2,7 +2,7 @@
 //  Cards.swift
 //  Caritas_Monterrey
 //
-//  Created by Abigail Curiel on 18/10/23.
+//  Created by Alumno on 18/10/23.
 //
 
 import SwiftUI
@@ -19,25 +19,32 @@ struct Cards: View {
             .onAppear(perform: {
                 changeBg()
             })
-            VStack(alignment: .leading) {
-                Text("Nombre")
-                    .font(.system(size:25).bold())
-                Text("\(card.NOMBRE_DONANTE)")
-                    .font(.system(size: 20).bold())
-                    .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
-                Text("Recibo: \(card.ID_RECIBO)")
-                    .font(.system(size:20).bold())
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("Recibo")
+                            .font(.system(size:25).bold())
+                        Text("\(card.ID_RECIBO)")
+                            .font(.system(size: 20).bold())
+                            .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                    }
+                    Spacer()
+                    VStack(alignment: .trailing) {
+                        Text("Monto")
+                            .font(.system(size:25).bold())
+                        Text("$\(card.IMPORTE, specifier: "%.2f")")
+                            .font(.system(size: 20).bold())
+                            .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
+                            .multilineTextAlignment(.trailing)
+                    }
+                    .padding(.trailing, 10)
+                }
+                HStack {
+                    Text("Recolector: \(card.USUARIO_RECOLECTOR)")
+                        .font(.system(size:20).bold())
+                    Spacer()
+                }
             }
-            Spacer()
-            VStack(alignment: .trailing) {
-                Text("Domicilio")
-                    .font(.system(size:25).bold())
-                Text("\(card.DIRECCION)")
-                    .font(.system(size: 20).bold())
-                    .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
-                    .multilineTextAlignment(.trailing)
-            }
-            .padding(.trailing, 10)
         }
         .frame(width: 357, height: 151)
         .background(Color.white.shadow(color: .black.opacity(0.25), radius: 2, x: 0, y: 4))
