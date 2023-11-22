@@ -10,10 +10,10 @@ import SwiftUI
 struct DetallesReciboView: View {
     @State var comentario: String = ""
     @State private var showAlert = false
-    @State private var pagado = 0
     @State private var sinComentario = false
     @State private var mensajeError = ""
     @State private var regresar = false
+    @State var estatus = ""
     @Environment(\.dismiss) private var dismiss
     var card: Card
     var body: some View {
@@ -92,6 +92,7 @@ struct DetallesReciboView: View {
                                     .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
                             }
                         }
+                        .padding(.top)
                         
                         Text("Nombre")
                             .font(
@@ -99,7 +100,7 @@ struct DetallesReciboView: View {
                                     .weight(.bold)
                             )
                             .foregroundColor(.black)
-                            
+                            .padding(.top)
                         
                         Text("\(card.NOMBRE_DONANTE)")
                             .font(
@@ -191,7 +192,12 @@ struct DetallesReciboView: View {
                             .foregroundColor(.black)
                             .padding(.top, 0.7)
                         
-                        Text("Placeholder")
+                        Text("\(comentario)")
+                            .font(
+                                Font.system(size: 18)
+                                    .weight(.semibold)
+                            )
+                            .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
                         
                         Text("Estatus")
                             .font(
@@ -201,10 +207,15 @@ struct DetallesReciboView: View {
                             .foregroundColor(.black)
                             .padding(.top, 0.7)
                         
-                        Text("\(card.ESTATUS_PAGO)")
+                        Text("\(estatus)")
+                            .font(
+                                Font.system(size: 18)
+                                    .weight(.semibold)
+                            )
+                            .foregroundColor(Color(red: 0, green: 0.23, blue: 0.36))
                     }
                     .onAppear(){
-                        pagado = card.ESTATUS_PAGO
+                        changeVars()
                     }
                 }
                 Spacer()
@@ -228,5 +239,6 @@ struct DetallesReciboView_Previews: PreviewProvider {
         DetallesReciboView(card: card1)
     }
 }
+
 
 
