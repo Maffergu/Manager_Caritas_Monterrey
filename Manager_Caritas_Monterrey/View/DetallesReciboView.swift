@@ -227,6 +227,22 @@ struct DetallesReciboView: View {
         }
         
     }
+
+    private func changeVars() {
+        if (card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0) {
+            estatus = "No Pagado"
+        } else if (card.ESTATUS_PAGO == 1) {
+            estatus = "Pagado"
+        } else {
+            estatus = "No Recolectado"
+        }
+        
+        if (card.COMENTARIOS == "") {
+            comentario = "No hay comentarios adicionales"
+        } else {
+            comentario = card.COMENTARIOS
+        }
+    }
 }
 
 func validateInput(_ input: String) -> Bool {
