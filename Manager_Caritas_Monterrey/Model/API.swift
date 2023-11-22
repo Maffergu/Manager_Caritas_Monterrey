@@ -2,12 +2,13 @@
 //  API.swift
 //  Caritas_Monterrey
 //
-//  Created by Eduardo Lugo on 18/10/23.
+//  Created by Alumno on 18/10/23.
 //
 
 import Foundation
 
 struct Card: Codable, Identifiable {
+    var COMENTARIOS: String
     var DIRECCION: String
     var ESTATUS_PAGO: Int
     var FECHA_PAGO: String
@@ -18,6 +19,7 @@ struct Card: Codable, Identifiable {
     var REFERENCIA_DOMICILIO: String
     var TEL_CASA: String
     var TEL_MOVIL: String
+    var USUARIO_RECOLECTOR: String
     var id: Int
    
 }
@@ -75,58 +77,6 @@ func loginManager(username: String, password: String, completion: @escaping (Int
     }
 }
 
-func dashboardRecolector(completion: @escaping ([Card]) -> Void) {
-    var cards: [Card] = []
-
-    let apiUrl = URL(string: "http://10.14.255.85:8085/recibosRecolector")!
-
-    if let idRecolector = UserDefaults.standard.string(forKey: "userId") {
-        let parameters: [String: Any] = [
-            "IdRecolector": idRecolector
-        ]
-
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: parameters)
-
-            var request = URLRequest(url: apiUrl)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.httpBody = jsonData
-
-            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print("Error: \(error)")
-                    completion(cards)
-                    return
-                }
-
-                let jsonDecoder = JSONDecoder()
-
-                if let data = data {
-                    do {
-                        let cardList = try jsonDecoder.decode([Card].self, from: data)
-
-                        print("Lista \(cardList) ")
-
-                        for cardItem in cardList {
-                            print("Id: \(cardItem.id) - Dirección \(cardItem.DIRECCION)")
-                        }
-                        cards = cardList
-                        completion(cards)
-                    } catch {
-                        print("Error parsing JSON: \(error)")
-                        completion(cards)
-                    }
-                }
-            }
-            task.resume()
-        } catch {
-            print("Error encoding JSON: \(error)")
-            completion(cards)
-        }
-    }
-}
-
 func callApi() -> Array<Card>{
     var cards: Array<Card> = []
     
@@ -173,4 +123,3 @@ func callApi() -> Array<Card>{
 }
 
 var listaCards = callApi()
-
