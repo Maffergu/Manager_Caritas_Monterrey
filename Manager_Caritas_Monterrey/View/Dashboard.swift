@@ -2,14 +2,25 @@
 //  Dashboard.swift
 //  Caritas_Monterrey
 //
-//  Created by Abigail Curiel on 18/10/23.
+//  Created by Alumno on 18/10/23.
 //
 
 import SwiftUI
+import Charts
+
+struct chartData: Identifiable {
+    let id: Int
+    let estatus: String
+    let cantidad: Int
+}
 
 struct Dashboard: View {
     @State var listaPrueba :Array<Card> = []
     @State private var selectedFilter = 0
+    @State private var pagados = 0
+    @State private var noPagados = 0
+    @State private var noRecolectados = 0
+    @State private var data: Array<chartData> = []
     
     var body: some View {
         NavigationStack {
@@ -57,29 +68,59 @@ struct Dashboard: View {
                             .frame(width: 300)
                     }
                 }
+                .onAppear() {
+                    data = graph()
+                }
+                .padding(.bottom, 10)
+                Chart(data){
+                    BarMark(
+                        x: .value("Cantidad", $0.cantidad)
+                    )
+                    .foregroundStyle(by: .value("Estatus", $0.estatus))
+                    .position(by: .value("Estatus", $0.estatus))
+                }
+                .chartLegend(position: .top, alignment: .center) {
+                    HStack {
+                        HStack{
+                            BasicChartSymbolShape.circle
+                                .foregroundColor(Color(red: 0, green: 0.5, blue: 0))
+                                .frame(width: 8, height: 8)
+                            Text("Pagados")
+                                .foregroundColor(.black)
+                                .font(.system(size: 14))
+                        }
+                        HStack{
+                            BasicChartSymbolShape.circle
+                                .foregroundColor(Color(red: 1, green: 0.5, blue: 0.2))
+                                .frame(width: 8, height: 8)
+                            Text("No Pagados")
+                                .foregroundColor(.black)
+                                .font(.system(size: 14))
+                        }
+                        HStack{
+                            BasicChartSymbolShape.circle
+                                .foregroundColor(Color(red: 161/255, green: 90/255, blue: 149/255))
+                                .frame(width: 8, height: 8)
+                            Text("No Recolectados")
+                                .font(.system(size: 14))
+                                .foregroundColor(.black)
+                        }
+                    }
+                }
+                .chartPlotStyle { charContent in
+                    charContent
+                        .frame(width: 250, height: 32)
+                        .padding(.bottom, 30)
+                }
+                .chartForegroundStyleScale(
+                            range: [Color(red: 0, green: 0.5, blue: 0), Color(red: 1, green: 0.5, blue: 0.2), Color(red: 161/255, green: 90/255, blue: 149/255)]
+                        )
                 VStack {
                     List(listaPrueba) { cardItem in
-                        if (cardItem.FECHA_PAGO == "" && cardItem.ESTATUS_PAGO != 1) {
-                            //morado, pendientes
-                            if(selectedFilter == 0 || selectedFilter == 3){
-                                NavigationLink {
-                                    DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
-                                } label: {
-                                    Cards(card: cardItem)
-                                }
-                            }
-                            
-                            
-                        } else if (cardItem.ESTATUS_PAGO == 1) {
-                            //verde, pagados
-                            if(selectedFilter == 0 || selectedFilter == 1){
-                                Cards(card: cardItem)
-                            }
-                            
-                        } else {
-                            if(selectedFilter == 0 || selectedFilter == 2){
-                                Cards(card: cardItem)
-                            }
+                        NavigationLink {
+                            DetallesReciboView(card: cardItem).navigationBarBackButtonHidden()
+                        } label: {
+                            Cards(card: cardItem)
                         }
                     }
                     .listStyle(.plain)
@@ -87,20 +128,30 @@ struct Dashboard: View {
                 }
                 .padding(.top, -50)
                 .onAppear(){
-                    dashboardRecolector { cards in
-                            if cards.isEmpty {
-                                print("No cards received")
-                            } else {
-                                listaPrueba = cards
-                            }
-                        }
-                    print("Dashboard")
-                    print(listaPrueba)
+                    listaPrueba = callApi()
                 }
                 Spacer()
             }
             .ignoresSafeArea()
         }
+    }
+    
+    private func graph() -> Array<chartData> {
+        for card in listaPrueba {
+            if (card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0) {
+                noPagados = noPagados + 1
+            } else if (card.ESTATUS_PAGO == 1) {
+                pagados = pagados + 1
+            } else {
+                noRecolectados = noRecolectados + 1
+            }
+        }
+        let data: [chartData] = [
+            chartData(id: 1, estatus: "Pagado", cantidad: pagados),
+            chartData(id: 2, estatus: "No Pagados", cantidad: noPagados),
+            chartData(id: 3, estatus: "No Recolectados", cantidad: noRecolectados)
+        ]
+        return data
     }
 }
 
@@ -109,4 +160,5 @@ struct Dashboard_Previews: PreviewProvider {
         Dashboard()
     }
 }
+
 
