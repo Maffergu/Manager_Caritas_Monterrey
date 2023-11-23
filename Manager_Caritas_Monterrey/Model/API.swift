@@ -55,6 +55,9 @@ func loginManager(username: String, password: String, completion: @escaping (Int
                         let message = (json["message"] as? String) ?? ""
                         if (message == "Authentication successful") {
                             let userID = 1
+                            if let token = json["token"] as? String {
+                                UserDefaults.standard.setValue(token, forKey: "token")
+                            }
                             completion(1)
                         } else {
                             let userID = 0
@@ -77,10 +80,10 @@ func loginManager(username: String, password: String, completion: @escaping (Int
     }
 }
 
-func callApi() -> Array<Card>{
-    var cards: Array<Card> = []
+func callApi() -> [Card] {
+    var cards: [Card] = []
     
-    print("Entrando a API")
+    print("Entering API")
     
     guard let url = URL(string: "http://10.14.255.85:8085/recibosManager") else {
         return cards
@@ -89,35 +92,42 @@ func callApi() -> Array<Card>{
     let group = DispatchGroup()
     group.enter()
     
-    let task = URLSession.shared.dataTask(with: url){ data, response, error in
+    var request = URLRequest(url: url)
+    request.httpMethod = "GET"
+    
+    let token = UserDefaults.standard.string(forKey: "token")
+    request.setValue(token, forHTTPHeaderField: "Authorization")
+    
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
         let jsonDecoder = JSONDecoder()
-        if (data != nil) {
+        if let data = data {
             do {
-                let cardList = try jsonDecoder.decode([Card].self, from: data!)
+                let cardList = try jsonDecoder.decode([Card].self, from: data)
                 
-                print("Lista \(cardList) ")
+                print("List: \(cardList)")
                 
                 for cardItem in cardList {
-                    print("Id: \(cardItem.id) - Dirección \(cardItem.DIRECCION)")
+                    print("Id: \(cardItem.id) - Address: \(cardItem.DIRECCION)")
                 }
                 cards = cardList
             } catch {
                 print(error)
             }
-            if let datosAPI = String(data: data!, encoding: .utf8) {
+            
+            if let datosAPI = String(data: data, encoding: .utf8) {
                 print(datosAPI)
             }
-        }else{
-            
+        } else {
             print("No data")
         }
         group.leave()
     }
+    
     task.resume()
     group.wait()
     
     print("******************************************")
-    print("Lista2: \(cards) ")
+    print("List2: \(cards)")
     
     return cards
 }
