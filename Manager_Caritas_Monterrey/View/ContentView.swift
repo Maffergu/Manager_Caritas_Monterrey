@@ -107,12 +107,22 @@ struct ContentView: View {
             
         }
         navigationBarBackButtonHidden(true)
+            .onTapGesture {
+                        hideKeyboard()
+                }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        let resign = #selector(UIResponder.resignFirstResponder)
+        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
 }
 
