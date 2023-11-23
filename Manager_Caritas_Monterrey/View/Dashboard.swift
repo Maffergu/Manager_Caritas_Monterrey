@@ -102,7 +102,7 @@ struct Dashboard: View {
                     HStack {
                         HStack{
                             BasicChartSymbolShape.circle
-                                .foregroundColor(Color(red: 0, green: 0.5, blue: 0))
+                                .foregroundColor(Color(red: 0.180, green: 0.8, blue: 0.443))
                                 .frame(width: 8, height: 8)
                             Text("Pagados")
                                 .foregroundColor(.black)
@@ -110,7 +110,7 @@ struct Dashboard: View {
                         }
                         HStack{
                             BasicChartSymbolShape.circle
-                                .foregroundColor(Color(red: 1, green: 0.5, blue: 0.2))
+                                .foregroundColor(Color(red: 0.906, green: 0.298, blue: 0.235))
                                 .frame(width: 8, height: 8)
                             Text("No Pagados")
                                 .foregroundColor(.black)
@@ -118,7 +118,7 @@ struct Dashboard: View {
                         }
                         HStack{
                             BasicChartSymbolShape.circle
-                                .foregroundColor(Color(red: 161/255, green: 90/255, blue: 149/255))
+                                .foregroundColor(Color(red: 0.945, green: 0.769, blue: 0.059))
                                 .frame(width: 8, height: 8)
                             Text("No Recolectados")
                                 .font(.system(size: 14))
@@ -132,7 +132,7 @@ struct Dashboard: View {
                         .padding(.bottom, 30)
                 }
                 .chartForegroundStyleScale(
-                            range: [Color(red: 0, green: 0.5, blue: 0), Color(red: 1, green: 0.5, blue: 0.2), Color(red: 161/255, green: 90/255, blue: 149/255)]
+                            range: [Color(red: 0.18, green: 0.8, blue: 0.443), Color(red: 0.906, green: 0.298, blue: 0.235), Color(red: 0.945, green: 0.769, blue: 0.059)]
                         )
                 VStack {
                     List(listaPrueba) { cardItem in
