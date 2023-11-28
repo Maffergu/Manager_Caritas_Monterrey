@@ -26,7 +26,7 @@ struct Card: Codable, Identifiable {
 
 func loginManager(username: String, password: String, completion: @escaping (Int) -> Void) {
     
-    let apiUrl = URL(string: "http://10.14.255.85:8085/loginManager")!
+    let apiUrl = URL(string: "https://equipo17.tc2007b.tec.mx:8085/loginManager")!
     
     let parameters: [String: Any] = [
         "USUARIO": username,
@@ -85,7 +85,7 @@ func callApi() -> [Card] {
     
     print("Entering API")
     
-    guard let url = URL(string: "http://10.14.255.85:8085/recibosManager") else {
+    guard let url = URL(string: "https://equipo17.tc2007b.tec.mx:8085/recibosManager") else {
         return cards
     }
     
