@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Caritas_Monterrey
 //
-//  Created by Eduardo Lugo on 17/10/23.
+//  Created by Alumno on 17/10/23.
 //
 
 import SwiftUI
@@ -61,6 +61,7 @@ struct ContentView: View {
                     Text(mensajeError)
                         .font(.system(size: 20))
                         .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
                     Button("Iniciar Sesión", action: {
                         loginManager(username: username, password: password) { userId in
                             if (userId == 1) {
@@ -68,7 +69,7 @@ struct ContentView: View {
                                 UserDefaults.standard.setValue(userId, forKey: "userId")
                                 navigateNoOrders = true
                             } else if (userId == 2) {
-                                mensajeError = "Ha ocurrido un error"
+                                mensajeError = "Ha ocurrido un error. \n Revise su conexión a Internet"
                                 navigateNoOrders = false
                             } else {
                                 mensajeError = "Credenciales Incorrectas"
@@ -106,10 +107,6 @@ struct ContentView: View {
             
             
         }
-        navigationBarBackButtonHidden(true)
-            .onTapGesture {
-                        hideKeyboard()
-                }
     }
 }
 
@@ -119,10 +116,4 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-extension View {
-    func hideKeyboard() {
-        let resign = #selector(UIResponder.resignFirstResponder)
-        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
-    }
-}
 
