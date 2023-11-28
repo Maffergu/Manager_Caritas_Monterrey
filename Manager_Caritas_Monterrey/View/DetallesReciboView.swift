@@ -227,7 +227,7 @@ struct DetallesReciboView: View {
         }
         
     }
-
+    
     private func changeVars() {
         if (card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0) {
             estatus = "No Pagado"
@@ -255,6 +255,7 @@ struct DetallesReciboView_Previews: PreviewProvider {
         DetallesReciboView(card: card1)
     }
 }
+
 
 
 
