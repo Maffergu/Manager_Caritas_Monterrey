@@ -12,6 +12,7 @@ struct Manager_Caritas_MonterreyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.light)
         }
     }
 }
