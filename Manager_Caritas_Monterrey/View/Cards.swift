@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Cards: View {
-    @State private var squareBg = Color(red: 161/255, green: 90/255, blue: 149/255)
+    @State private var squareBg = Color(red: 0.945, green: 0.769, blue: 0.059)
     @State private var comentario = ""
     var card: Card
     var body: some View {
@@ -62,7 +62,7 @@ struct Cards: View {
             squareBg = Color(red: 0, green: 0.5, blue: 0)
         }
         if card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0 {
-            squareBg = Color(red: 1, green: 0.5, blue: 0.2)
+            squareBg = Color(red: 0.906, green: 0.298, blue: 0.235)
         }
         if card.COMENTARIOS == "" {
             comentario = "Sin Comentario"
@@ -79,4 +79,6 @@ struct Cards_Previews: PreviewProvider {
         Cards(card: card1)
     }
 }
+
+
 
