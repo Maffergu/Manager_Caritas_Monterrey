@@ -59,10 +59,10 @@ struct Cards: View {
     
     private func changeBg() {
         if card.ESTATUS_PAGO == 1 {
-            squareBg = Color(red: 0, green: 0.5, blue: 0)
+            squareBg = Color(red: 0.38823529411764707, green: 0.8313725490196079, blue: 0.11764705882352941)
         }
         if card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0 {
-            squareBg = Color(red: 0.906, green: 0.298, blue: 0.235)
+            squareBg = Color(red: 1.0, green: 0.2, blue: 0.2)
         }
         if card.COMENTARIOS == "" {
             comentario = "Sin Comentario"
