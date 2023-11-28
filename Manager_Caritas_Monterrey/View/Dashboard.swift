@@ -96,7 +96,9 @@ struct Dashboard: View {
                                         .cornerRadius(10)
                                     HStack{
                                         Picker(selection: $selectedCollector, label: Text("Ordenar por").font(.title).bold()){
-                                            Text("ClaraRecolector").tag(1).font(.system(size: 12))
+                                            Text("ClaraRecolector").tag(1).font(.system(size: 12)).onTapGesture {
+                                                graph()
+                                            }
                                             Text("LaloRecolector").tag(2).font(.system(size: 12))
                                             Text("GustavoRecolector").tag(3).font(.system(size: 12))
                                             Text("MaferRecolector").tag(4).font(.system(size: 12))
