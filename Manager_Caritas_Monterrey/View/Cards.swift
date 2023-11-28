@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Cards: View {
     @State private var squareBg = Color(red: 161/255, green: 90/255, blue: 149/255)
+    @State private var comentario = ""
     var card: Card
     var body: some View {
         HStack{
@@ -44,6 +45,11 @@ struct Cards: View {
                         .font(.system(size:20).bold())
                     Spacer()
                 }
+                HStack {
+                    Text("Comentario: \(comentario)")
+                        .font(.system(size:20).bold())
+                    Spacer()
+                }
             }
         }
         .frame(width: 357, height: 151)
@@ -58,6 +64,12 @@ struct Cards: View {
         if card.FECHA_PAGO != "" && card.ESTATUS_PAGO == 0 {
             squareBg = Color(red: 1, green: 0.5, blue: 0.2)
         }
+        if card.COMENTARIOS == "" {
+            comentario = "Sin Comentario"
+        } else {
+            comentario = card.COMENTARIOS
+        }
+        
     }
 }
 
@@ -67,5 +79,4 @@ struct Cards_Previews: PreviewProvider {
         Cards(card: card1)
     }
 }
-
 
