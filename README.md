@@ -53,3 +53,5 @@ De tal modo, la necesidad de una aplicación móvil en iOS diseñada específica
 2. [Documento de Segunda Entrega](https://docs.google.com/document/d/1CAPHNk-6dLt_x0R2uCbSaKYclDm0Tlr3cuIQXjMwgjs/edit?usp=sharing)
 
 3. [Documento de Tercera Entrega](https://docs.google.com/document/d/1IETcE38SVgsrF8jmTCMLyGsm3rwCE9q5cMa60D_V8eo/edit?usp=sharing)
+
+4. [Documento de Cuarta Entrega](https://docs.google.com/document/d/1EQ6efuoSpdEh1jiPNQlQuVzKzS-0N2jxv4OXsIq4zaw/edit?usp=sharing)
