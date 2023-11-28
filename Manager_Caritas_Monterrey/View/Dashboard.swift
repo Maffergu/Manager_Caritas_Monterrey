@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Charts
+import CoreMotion
 
 struct chartData: Identifiable {
     let id: Int
@@ -21,8 +22,11 @@ struct Dashboard: View {
     @State private var pagados = 0
     @State private var noPagados = 0
     @State private var noRecolectados = 0
-    @State private var data: Array<chartData> = []
+    @State private var datas: Array<chartData> = []
     @Environment(\.dismiss) private var dismiss
+    @State var xActual = 0.0
+    
+    let motion = CMMotionManager()
     
     var body: some View {
         NavigationStack {
@@ -58,6 +62,9 @@ struct Dashboard: View {
                                     .colorInvert()
                                     .padding(.top, 13)
                             }
+                            .onAppear(perform: {
+                                startAccelerometer()
+                            })
 
                         }
                         .padding(.top, 10)
@@ -96,9 +103,7 @@ struct Dashboard: View {
                                         .cornerRadius(10)
                                     HStack{
                                         Picker(selection: $selectedCollector, label: Text("Ordenar por").font(.title).bold()){
-                                            Text("ClaraRecolector").tag(1).font(.system(size: 12)).onTapGesture {
-                                                graph()
-                                            }
+                                            Text("ClaraRecolector").tag(1).font(.system(size: 12))
                                             Text("LaloRecolector").tag(2).font(.system(size: 12))
                                             Text("GustavoRecolector").tag(3).font(.system(size: 12))
                                             Text("MaferRecolector").tag(4).font(.system(size: 12))
@@ -111,10 +116,10 @@ struct Dashboard: View {
                     }
                 }
                 .onAppear() {
-                    data = graph()
+                    datas = graph()
                 }
                 .padding(.bottom, 10)
-                Chart(data){
+                Chart(datas){
                     BarMark(
                         x: .value("Cantidad", $0.cantidad)
                     )
@@ -125,7 +130,7 @@ struct Dashboard: View {
                     HStack {
                         HStack{
                             BasicChartSymbolShape.circle
-                                .foregroundColor(Color(red: 0, green: 0.5, blue: 0))
+                                .foregroundColor(Color(red: 0.38823529411764707, green: 0.8313725490196079, blue: 0.11764705882352941))
                                 .frame(width: 8, height: 8)
                             Text("Pagados")
                                 .foregroundColor(.black)
@@ -133,7 +138,7 @@ struct Dashboard: View {
                         }
                         HStack{
                             BasicChartSymbolShape.circle
-                                .foregroundColor(Color(red: 0.906, green: 0.298, blue: 0.235))
+                                .foregroundColor(Color(red: 1.0, green: 0.2, blue: 0.2))
                                 .frame(width: 8, height: 8)
                             Text("No Pagados")
                                 .foregroundColor(.black)
@@ -143,7 +148,7 @@ struct Dashboard: View {
                             BasicChartSymbolShape.circle
                                 .foregroundColor(Color(red: 0.945, green: 0.769, blue: 0.059))
                                 .frame(width: 8, height: 8)
-                            Text("No Recolectados")
+                            Text("Pendientes")
                                 .font(.system(size: 14))
                                 .foregroundColor(.black)
                         }
@@ -155,7 +160,7 @@ struct Dashboard: View {
                         .padding(.bottom, 30)
                 }
                 .chartForegroundStyleScale(
-                            range: [Color(red: 0, green: 0.5, blue: 0), Color(red: 1, green: 0.5, blue: 0.2), Color(red: 161/255, green: 90/255, blue: 149/255)]
+                            range: [Color(red: 0.388, green: 0.831, blue: 0.117), Color(red: 1.0, green: 0.2, blue: 0.2), Color(red: 0.945, green: 0.769, blue: 0.059)]
                         )
                 VStack {
                     List(listaPrueba) { cardItem in
@@ -348,7 +353,29 @@ struct Dashboard: View {
         print(data)
         return data
     }
+    
+    func startAccelerometer(){
+        if (motion.isAccelerometerAvailable){
+            //Sensar cada 0.5 segundos
+            motion.deviceMotionUpdateInterval = 0.5
+            
+            //Iniciar el "escuchar" el acelerometro
+            motion.startDeviceMotionUpdates(to: .main) { data, error in
+                if let data = data {
+                    datas = graph()
+                    xActual = data.userAcceleration.x
+                    
+                    if (abs(xActual) > 1) {
+                        selectedFilter = 0
+                        selectedCollector = 0
+                    }
+                }
+            }
+        }
+    }
 }
+
+
 
 struct Dashboard_Previews: PreviewProvider {
     static var previews: some View {
