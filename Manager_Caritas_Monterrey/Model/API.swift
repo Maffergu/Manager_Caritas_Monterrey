@@ -44,7 +44,6 @@ func loginManager(username: String, password: String, completion: @escaping (Int
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print("Error: \(error)")
-                let userID = 2
                 completion(2)
                 return
             }
@@ -54,13 +53,14 @@ func loginManager(username: String, password: String, completion: @escaping (Int
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                         let message = (json["message"] as? String) ?? ""
                         if (message == "Authentication successful") {
-                            let userID = 1
                             if let token = json["token"] as? String {
                                 UserDefaults.standard.setValue(token, forKey: "token")
                             }
                             completion(1)
-                        } else {
-                            let userID = 0
+                        } else if(message == "An invalid response was received from the upstream server"){
+                            print(message)
+                            completion(2)
+                        }else{
                             completion(0)
                         }
                     } else {
