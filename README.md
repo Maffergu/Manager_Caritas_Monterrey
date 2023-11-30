@@ -48,7 +48,7 @@ De tal modo, la necesidad de una aplicación móvil en iOS diseñada específica
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 # Otros Repositorios
-[Repositorio del Recoelctor](https://github.com/VMink/AplicacionMobil.git)
+[Repositorio del Recolector](https://github.com/VMink/AplicacionMobil.git)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
